@@ -3,24 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>活字排版工坊</title>
+    <title>活字试印版本台</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="shell">
       <header class="topbar">
         <div>
-          <p class="eyebrow">本地活字印章排版</p>
-          <h1>活字排版工坊</h1>
+          <p class="eyebrow">本地活字印章 · 试印版本台</p>
+          <h1>活字试印版本台</h1>
         </div>
         <div class="top-actions">
-          <button id="saveDraftBtn" class="primary">保存草稿</button>
+          <button id="trialBtn" class="primary">开试印</button>
+          <button id="adoptBtn">标记采用</button>
+          <button id="voidBtn">作废试印</button>
+          <button id="forkDraftBtn">另存为草稿</button>
+          <button id="saveDraftBtn">保存草稿</button>
           <button id="exportBtn">导出预览图</button>
           <button id="clearBoardBtn">清空版面</button>
         </div>
       </header>
 
-      <section class="settings-bar" aria-label="版面设置">
+      <div id="modeBanner" class="mode-banner" hidden></div>
+      <div id="notice" class="notice" hidden></div>
+
+      <section class="settings-bar" aria-label="试印设置">
         <label>
           纸张
           <select id="paperSize">
@@ -28,6 +35,19 @@
             <option value="bookmark">书签</option>
             <option value="square">方形小笺</option>
           </select>
+        </label>
+        <label>
+          墨色
+          <select id="inkColor">
+            <option value="pine">松烟墨</option>
+            <option value="cinnabar">朱砂</option>
+            <option value="indigo">靛蓝</option>
+            <option value="ochre">赭石</option>
+          </select>
+        </label>
+        <label>
+          压力（2–8）
+          <input id="pressure" type="number" min="2" max="8" step="1" value="5" />
         </label>
         <label>
           方向
@@ -77,7 +97,7 @@
           <div class="status-strip">
             <div>
               <strong id="selectedTypeLabel">未选择字模</strong>
-              <span>点击字模后，在版面格子中落字，也可拖拽字模到版面。</span>
+              <span>点击字模后，在版面格子中落字；可拖拽字模入版，也可拖动版上活字移动。</span>
             </div>
             <div id="shortageBadge" class="badge ok">数量充足</div>
           </div>
@@ -86,10 +106,13 @@
 
         <aside class="panel draft-panel">
           <div class="panel-head">
-            <h2>草稿与核对</h2>
+            <h2>版本与核对</h2>
             <span id="placedCount"></span>
           </div>
           <div id="usageList" class="usage-list"></div>
+          <div class="divider"></div>
+          <h3>版本记录</h3>
+          <div id="versionList" class="version-list"></div>
           <div class="divider"></div>
           <h3>已保存草稿</h3>
           <div id="draftList" class="draft-list"></div>
@@ -97,6 +120,9 @@
       </section>
     </main>
 
+    <script src="storage.js"></script>
+    <script src="rules.js"></script>
+    <script src="versions.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
