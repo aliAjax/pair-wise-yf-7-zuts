@@ -10,15 +10,20 @@
     <main class="shell">
       <header class="topbar">
         <div>
-          <p class="eyebrow">本地活字印章排版</p>
+          <p class="eyebrow">本地活字印章排版 · 试印版本台</p>
           <h1>活字排版工坊</h1>
         </div>
         <div class="top-actions">
-          <button id="saveDraftBtn" class="primary">保存草稿</button>
+          <button id="startProofBtn" class="primary">开试印</button>
+          <button id="passProofBtn" class="primary" hidden>试印通过</button>
+          <button id="saveDraftBtn">保存草稿</button>
           <button id="exportBtn">导出预览图</button>
           <button id="clearBoardBtn">清空版面</button>
         </div>
       </header>
+
+      <div id="noticeBar" class="notice" hidden></div>
+      <div id="proofBanner" class="proof-banner" hidden></div>
 
       <section class="settings-bar" aria-label="版面设置">
         <label>
@@ -28,6 +33,18 @@
             <option value="bookmark">书签</option>
             <option value="square">方形小笺</option>
           </select>
+        </label>
+        <label>
+          墨色
+          <select id="inkColor">
+            <option value="pine">松烟墨</option>
+            <option value="cinnabar">朱砂红</option>
+            <option value="indigo">靛青</option>
+          </select>
+        </label>
+        <label>
+          压力 <output id="pressureValue">压力 5</output>
+          <input id="pressure" type="range" min="1" max="10" step="1" value="5" />
         </label>
         <label>
           方向
@@ -93,10 +110,19 @@
           <div class="divider"></div>
           <h3>已保存草稿</h3>
           <div id="draftList" class="draft-list"></div>
+          <div class="divider"></div>
+          <div class="panel-head">
+            <h3>版本记录</h3>
+            <span id="versionCount"></span>
+          </div>
+          <div id="versionList" class="version-list"></div>
         </aside>
       </section>
     </main>
 
+    <script src="print-rules.js"></script>
+    <script src="version-store.js"></script>
+    <script src="storage.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
